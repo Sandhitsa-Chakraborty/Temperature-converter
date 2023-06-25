@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <title>Temperature Converter</title>
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .result {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Temperature Converter</h1>
+    <div class="card">
+      <div class="form-group">
+        <label for="celsius">Celsius</label>
+        <input type="number" class="form-control" id="celsius" placeholder="Enter Celsius temperature">
+      </div>
+      <div class="form-group">
+        <label for="fahrenheit">Fahrenheit</label>
+        <input type="number" class="form-control" id="fahrenheit" placeholder="Enter Fahrenheit temperature">
+      </div>
+      <div class="form-group">
+        <label for="kelvin">Kelvin</label>
+        <input type="number" class="form-control" id="kelvin" placeholder="Enter Kelvin temperature">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="convertTemperatures()">Convert</button>
+      <button type="button" class="btn btn-secondary" onclick="clearInputs()">Clear</button>
+      <div id="result" class="mt-4"></div>
+    </div>
+  </div>
+
+  <script>
+    function convertTemperatures() {
+      var celsiusInput = document.getElementById("celsius");
+      var fahrenheitInput = document.getElementById("fahrenheit");
+      var kelvinInput = document.getElementById("kelvin");
+
+      var celsius = parseFloat(celsiusInput.value);
+      var fahrenheit = (celsius * 9 / 5) + 32;
+      var kelvin = celsius + 273.15;
+
+      fahrenheitInput.value = fahrenheit.toFixed(2);
+      kelvinInput.value = kelvin.toFixed(2);
+
+      showResult(celsius, fahrenheit, kelvin);
+    }
+
+    function clearInputs() {
+      document.getElementById("celsius").value = "";
+      document.getElementById("fahrenheit").value = "";
+      document.getElementById("kelvin").value = "";
+      document.getElementById("result").innerHTML = "";
+    }
+
+    function showResult(celsius, fahrenheit, kelvin) {
+      var resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = `
+        <div class="result">
+          <p>${celsius.toFixed(2)}°C</p>
+          <p>${fahrenheit.toFixed(2)}°F</p>
+          <p>${kelvin.toFixed(2)}K</p>
+        </div>
+      `;
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
